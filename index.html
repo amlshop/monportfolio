@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stanislas AKAKPO — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:     #080e1c;
+      --panel:  #060b15;
+      --card:   #0d1830;
+      --line:   #132040;
+      --text:   #e2e8f0;
+      --muted:  #7b9bc4;
+      --accent: #38bdf8;
+      --accent2: #0ea5e9;
+      --glow:   rgba(56,189,248,0.15);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--panel);
+      border-right: 1px solid var(--line);
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .brand-mark::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 14px; height: 14px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+    }
+
+    .brand-mark::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 14px; height: 14px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+    }
+
+    .brand-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(56,189,248,0.07);
+    }
+
+    .nav-link.active { color: var(--accent); }
+
+    .nav-icon {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Menu déroulant projets */
+    .nav-group { display: flex; flex-direction: column; }
+
+    .nav-btn {
+      all: unset;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.18s ease;
+      width: 100%;
+    }
+
+    .nav-btn:hover { color: var(--text); background: rgba(56,189,248,0.07); }
+
+    .arrow {
+      margin-left: auto;
+      font-size: 0.7rem;
+      transition: transform 0.25s;
+      opacity: 0.6;
+    }
+
+    .arrow.open { transform: rotate(180deg); }
+
+    .sub-nav {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      margin: 4px 0 4px 20px;
+      padding-left: 14px;
+      border-left: 2px solid rgba(56,189,248,0.3);
+    }
+
+    .sub-nav.open { display: flex; }
+
+    .sub-link {
+      display: block;
+      padding: 7px 10px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+
+    .sub-link:hover { color: var(--accent); background: rgba(56,189,248,0.06); }
+
+    .sidebar-footer {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(56,189,248,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.25);
+    }
+
+    .pill.ghost {
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--line);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .content { overflow-y: auto; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: center;
+      gap: 48px;
+      padding: 48px 48px 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .kicker {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .title {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .title span { color: var(--accent); }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #08121f;
+      box-shadow: 0 0 24px rgba(56,189,248,0.3);
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(56,189,248,0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── PHOTO CARD ── */
+    .hero-right {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: 340px;
+      height: 400px;
+    }
+
+    .corner {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+    }
+
+    .corner.tl { top: -8px; left: -8px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+    .corner.tr { top: -8px; right: -8px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+    .corner.bl { bottom: -8px; left: -8px; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+    .corner.br { bottom: -8px; right: -8px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+    .portrait-inner {
+      width: 100%;
+      height: 100%;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .portrait-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .portrait-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .portrait-placeholder span:first-child { font-size: 2rem; opacity: 0.4; }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 64px 56px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 40px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: rgba(56,189,248,0.35);
+      background: rgba(13,24,48,0.8);
+      transform: translateX(4px);
+      box-shadow: 0 0 30px rgba(56,189,248,0.07);
+    }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(56,189,248,0.1);
+      border: 1px solid rgba(56,189,248,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .project-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .project-info p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: rgba(56,189,248,0.08);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.2);
+    }
+
+    .project-arrow {
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .project-card:hover .project-arrow { color: var(--accent); transform: translateX(4px); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5,9,18,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.open { opacity: 1; }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 36px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 60px rgba(56,189,248,0.08);
+    }
+
+    .modal-overlay.open .modal-card { transform: translateY(0); }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .modal-close:hover { color: var(--text); border-color: var(--accent); }
+
+    .modal-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(56,189,248,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.25);
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .modal-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .modal-section-title {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+
+    .skills-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skills-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+
+    .skills-list li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(56,189,248,0.35);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon {
+      font-size: 1.4rem;
+      width: 44px; height: 44px;
+      background: rgba(56,189,248,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info span {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .contact-info strong { font-size: 0.9rem; }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      body { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 40px 24px; }
+      .hero-right { display: none; }
+      .section { padding: 40px 24px; }
+      .project-card { grid-template-columns: auto 1fr; }
+      .project-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark"></div>
+    <span class="brand-text">Portfolio</span>
+  </div>
+
+  <nav class="nav">
+    <a href="#home" class="nav-link active">
+      <span class="nav-icon">🏠</span> Accueil
+    </a>
+    <a href="#about" class="nav-link">
+      <span class="nav-icon">👤</span> À propos
+    </a>
+
+    <!-- Menu déroulant Projets -->
+    <div class="nav-group">
+      <button class="nav-btn" onclick="toggleProjects(this)">
+        <span class="nav-icon">📁</span>
+        Projets
+        <span class="arrow">▼</span>
+      </button>
+      <div class="sub-nav" id="projects-sub">
+        <a href="#projects" class="sub-link" onclick="openModal('ratp')">Chargé de Méthode — RATP</a>
+        <a href="#projects" class="sub-link" onclick="openModal('sae_s4')">Station météo IoT autonome</a>
+        <a href="#projects" class="sub-link" onclick="openModal('sae_s3')">Maintenance & Supervision Festo</a>
+        <a href="#projects" class="sub-link" onclick="openModal('robot')">Robot détecteur d'obstacles</a>
+        <a href="#projects" class="sub-link" onclick="openModal('carte_elec')">Carte amplificateur & écrêteur</a>
+      </div>
+    </div>
+
+    <a href="#skills" class="nav-link">
+      <span class="nav-icon">⚡</span> Compétences
+    </a>
+    <a href="#contact" class="nav-link">
+      <span class="nav-icon">✉️</span> Contact
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <span class="pill">BUT GEII</span>
+    <span class="pill ghost">Alternance</span>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="content">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-left">
+      <p class="kicker">Bonjour, je m'appelle</p>
+      <h1 class="name">Stanislas AKAKPO</h1>
+      <h2 class="title">Étudiant en <span>BUT GEII</span></h2>
+      <p class="subtitle">
+        Électronique · Systèmes embarqués<br>
+        En recherche d'alternance — Septembre 2026
+      </p>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn btn-secondary">Me contacter</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="portrait-frame">
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+        <div class="portrait-inner">
+          <img src="assets/portrait.png" alt="Stanislas AKAKPO">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="section fade-up" id="about">
+    <p class="section-label">Qui suis-je ?</p>
+    <h2 class="section-title">À propos</h2>
+    <p style="font-size:1rem; color:var(--muted); line-height:1.8; max-width:680px;">
+      <strong style="color:var(--text)">Akakpo Stanislas</strong>, actuellement en deuxième année de 
+      <strong style="color:var(--accent)">BUT Génie Électrique et Informatique Industrielle</strong>, 
+      spécialité électronique et systèmes embarqués. 
+      Ce portfolio regroupe l'ensemble de mon parcours et de mes projets académiques.
+    </p>
+  </section>
+
+  <!-- PROJETS -->
+  <section class="section fade-up" id="projects">
+    <p class="section-label">Travaux académiques & personnels</p>
+    <h2 class="section-title">Mes Projets</h2>
+
+    <div class="projects-list">
+
+      <div class="project-card" onclick="openModal('ratp')">
+        <div class="project-icon">🚇</div>
+        <div class="project-info">
+          <h3>Stage RATP — Chargé de Méthode</h3>
+          <p>Amélioration de l'outil SDM, fiches techniques MP89/MP05, maintenance préventive — Ateliers de Fontenay MRF L01.</p>
+          <div class="project-tags">
+            <span class="tag">Maintenance</span>
+            <span class="tag">Documentation technique</span>
+            <span class="tag">SDM</span>
+          </div>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project-card" onclick="openModal('sae_s4')">
+        <div class="project-icon">🌦️</div>
+        <div class="project-info">
+          <h3>SAÉ S4 — Station météo IoT autonome</h3>
+          <p>PCB KiCad, STM32 en C, encodage Cayenne LPP, déploiement LoRaWAN TTN → TagoIO.</p>
+          <div class="project-tags">
+            <span class="tag">KiCad</span>
+            <span class="tag">STM32</span>
+            <span class="tag">LoRaWAN</span>
+            <span class="tag">IoT</span>
+          </div>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project-card" onclick="openModal('sae_s3')">
+        <div class="project-icon">⚙️</div>
+        <div class="project-info">
+          <h3>SAÉ S3 — Maintenance & Supervision Festo</h3>
+          <p>Diagnostic de pannes, communication réseau automate/E-S, supervision IHM et planification sous Excel.</p>
+          <div class="project-tags">
+            <span class="tag">Automatisme</span>
+            <span class="tag">Maintenance</span>
+            <span class="tag">IHM</span>
+          </div>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project-card" onclick="openModal('robot')">
+        <div class="project-icon">🤖</div>
+        <div class="project-info">
+          <h3>SAÉ S2 — Robot détecteur d'obstacles</h3>
+          <p>Robot autonome avec capteurs ultrasons et Arduino, détection en temps réel.</p>
+          <div class="project-tags">
+            <span class="tag">Arduino</span>
+            <span class="tag">Capteurs</span>
+            <span class="tag">Embarqué</span>
+          </div>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+      <div class="project-card" onclick="openModal('carte_elec')">
+        <div class="project-icon">🔌</div>
+        <div class="project-info">
+          <h3>SAÉ S1 — Carte amplificateur & écrêteur</h3>
+          <p>Simulation, soudage et validation d'un circuit amplificateur + écrêteur analogique.</p>
+          <div class="project-tags">
+            <span class="tag">Analogique</span>
+            <span class="tag">LTspice</span>
+            <span class="tag">Soudage</span>
+          </div>
+        </div>
+        <span class="project-arrow">→</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section class="section fade-up" id="skills">
+    <p class="section-label">Savoir-faire technique</p>
+    <h2 class="section-title">Compétences</h2>
+
+    <div class="contact-grid">
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-icon">⚡</div>
+        <div class="contact-info">
+          <span>Électronique</span>
+          <strong>Circuits, Conception, LTspice, Simulation</strong>
+        </div>
+      </div>
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-icon">💻</div>
+        <div class="contact-info">
+          <span>Informatique industrielle</span>
+          <strong>C (STM32Cube) • Python • Arduino</strong>
+        </div>
+      </div>
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-icon">🏭</div>
+        <div class="contact-info">
+          <span>Automatisme</span>
+          <strong>Siemens, FPGA, VHDL, Vivado</strong>
+        </div>
+      </div>
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-icon">📐</div>
+        <div class="contact-info">
+          <span>Conception & CAO</span>
+          <strong>SolidWorks, KiCad, Prototypage 3D</strong>
+        </div>
+      </div>
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-icon">📊</div>
+        <div class="contact-info">
+          <span>Développement VBA</span>
+          <strong>Automatisation, Traitement de données</strong>
+        </div>
+      </div>
+      <div class="contact-card" style="cursor:default">
+        <div class="contact-icon">🔧</div>
+        <div class="contact-info">
+          <span>Maintenance</span>
+          <strong>Diagnostic, Préventive & Corrective</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section fade-up" id="contact">
+    <p class="section-label">Me rejoindre</p>
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact-grid">
+      <div class="contact-card" style="cursor:pointer" onclick="navigator.clipboard.writeText('stanislasakakpo.com@gmail.com').then(()=>alert('📧 Email copié !\nstanislasakakpo.com@gmail.com'))">
+        <div class="contact-icon">📧</div>
+        <div class="contact-info">
+          <span>Email</span>
+          <strong>Cliquer pour copier</strong>
+        </div>
+      </div>
+      <a href="https://www.linkedin.com/in/stanislas-akakpo-a7bb53354/" target="_blank" class="contact-card">
+        <div class="contact-icon">💼</div>
+        <div class="contact-info">
+          <span>LinkedIn</span>
+          <strong>Mon profil</strong>
+        </div>
+      </a>
+      <a href="assets/Cv_AKAKPO stanislas.pdf" target="_blank" class="contact-card">
+        <div class="contact-icon">📄</div>
+        <div class="contact-info">
+          <span>CV</span>
+          <strong>Télécharger</strong>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-card" id="modal-card">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  // ── DONNÉES DES PROJETS ──
+  const PROJECTS = {
+    ratp: {
+      tag: "Stage — Avril 2026 · Juin 2026",
+      title: "Chargé de Méthode — RATP Ateliers de Fontenay",
+      desc: "Stage au sein de l'Unité de Maintenance MP des Ateliers de Fontenay (MRF L01). Participation active à la maintenance préventive du matériel roulant MP89 et MP05, et contribution à l'amélioration des outils de travail des techniciens.",
+      skills: ["Amélioration d'un navigateur graphique (SDM) pour techniciens de maintenance", "Structuration de fiches techniques sur le MP89 et MP05", "Maintenance préventive au sein de l'Unité de Maintenance MP", "Rédaction de documentation technique"],
+      tools: ["SDM", "MP89", "MP05", "Excel"],
+      pdf: null,
+      github: null
+    },
+    sae_s4: {
+      tag: "SAÉ — BUT2 Semestre 4 · 2026",
+      title: "Station météo IoT autonome",
+      desc: "Conception et déploiement d'une station météo IoT complète : schématique et routage PCB sous KiCad, programmation STM32 en C (I2C, UART, encodage Cayenne LPP) et transmission des données vers le cloud via LoRaWAN (TTN → TagoIO).",
+      skills: ["Conception schématique et routage PCB (KiCad)", "Programmation STM32 en C (I2C, UART)", "Encodage Cayenne LPP", "Déploiement LoRaWAN via TTN", "Dashboard cloud TagoIO"],
+      tools: ["KiCad", "STM32 Nucleo L432KC", "SHT31", "Module XM001 LoRaWAN", "TTN", "TagoIO"],
+      pdf: "assets/SAE_ESE_IOT.pdf",
+      github: null
+    },
+    sae_s3: {
+      tag: "SAÉ — BUT2 Semestre 3 · 2026",
+      title: "Maintenance & Supervision — Station Festo",
+      desc: "Maintenance et diagnostic de pannes d'une station automatisée Festo. Mise en œuvre de la communication réseau automate/E-S, supervision et planification sous Excel (IHM, indicateurs de performance, suivi des interventions).",
+      skills: ["Maintenance et diagnostic de pannes", "Communication réseau automate/E-S", "Supervision IHM", "Planification et indicateurs sous Excel"],
+      tools: ["Station Festo", "Automate", "Excel"],
+      pdf: null,
+      github: null
+    },
+    robot: {
+      tag: "SAÉ — BUT1 Semestre 2 · 2025",
+      title: "Robot détecteur d'obstacles",
+      desc: "Programmation d'un robot autonome capable de détecter et d'éviter des obstacles en temps réel grâce à des capteurs ultrasons et un microcontrôleur Arduino.",
+      skills: ["Programmation Arduino (C/C++)", "Interfaçage capteurs ultrasons", "Détection et évitement d'obstacles en temps réel", "Câblage et intégration électronique"],
+      tools: ["Arduino", "Capteurs ultrasons HC-SR04"],
+      pdf: "assets/Rapport_sae_robot.pdf",
+      github: null
+    },
+    carte_elec: {
+      tag: "SAÉ — BUT1 Semestre 1 · 2025",
+      title: "Carte électronique — Amplificateur & Écrêteur",
+      desc: "Conception d'un circuit amplificateur et écrêteur analogique : simulation, soudage des composants et validation du filtrage. Réalisation complète d'une carte électronique de A à Z.",
+      skills: ["Simulation de circuit analogique", "Soudage de composants", "Filtrage et amplification", "Validation sur oscilloscope"],
+      tools: ["LTspice", "Oscilloscope", "Fer à souder", "Multimètre"],
+      pdf: "assets/Rapport_sae_carte_électronique.pdf",
+      github: null
+    },
+  };
+
+  // ── MODAL ──
+  function openModal(id) {
+    const p = PROJECTS[id];
+    if (!p) return;
+
+    const toolsHTML = p.tools ? `
+      <p class="modal-section-title">Outils utilisés</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+        ${p.tools.map(t => `<span class="tag">${t}</span>`).join('')}
+      </div>` : '';
+
+    const actionsHTML = `
+      <div class="modal-actions">
+        ${p.pdf ? `<a href="${p.pdf}" target="_blank" class="btn btn-primary">📄 Rapport PDF</a>` : ''}
+        ${p.github ? `<a href="${p.github}" target="_blank" class="btn btn-secondary">💻 GitHub</a>` : ''}
+        ${!p.pdf && !p.github ? `<span style="color:var(--muted);font-size:0.85rem">📎 Documents à venir</span>` : ''}
+      </div>`;
+
+    document.getElementById('modal-content').innerHTML = `
+      <span class="modal-tag">${p.tag}</span>
+      <h2 class="modal-title">${p.title}</h2>
+      <p class="modal-desc">${p.desc}</p>
+      <p class="modal-section-title">Compétences développées</p>
+      <ul class="skills-list">
+        ${p.skills.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+      ${toolsHTML}
+      ${actionsHTML}
+    `;
+
+    const overlay = document.getElementById('modal');
+    overlay.style.display = 'flex';
+    requestAnimationFrame(() => overlay.classList.add('open'));
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModalBtn() {
+    const overlay = document.getElementById('modal');
+    overlay.classList.remove('open');
+    setTimeout(() => { overlay.style.display = 'none'; }, 250);
+    document.body.style.overflow = '';
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('modal')) closeModalBtn();
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModalBtn();
+  });
+
+  // ── MENU DÉROULANT ──
+  function toggleProjects(btn) {
+    const sub = document.getElementById('projects-sub');
+    const arrow = btn.querySelector('.arrow');
+    sub.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  // ── NAV ACTIVE ──
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ── SCROLL ANIMATIONS ──
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+</script>
+
+</body>
+</html>
