@@ -7,15 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:     #080e1c;
-      --panel:  #060b15;
-      --card:   #0d1830;
-      --line:   #132040;
-      --text:   #e2e8f0;
-      --muted:  #7b9bc4;
-      --accent: #38bdf8;
-      --accent2: #0ea5e9;
-      --glow:   rgba(56,189,248,0.15);
+      --bg:     #f8fafc;
+      --panel:  #ffffff;
+      --card:   #ffffff;
+      --line:   #dde7f2;
+      --text:   #0f172a;
+      --muted:  #51647f;
+      --accent: #0284c7;
+      --accent2: #0369a1;
+      --glow:   rgba(2,132,199,0.12);
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -27,7 +27,7 @@
       color: var(--text);
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 285px 1fr;
     }
 
     /* ── SIDEBAR ── */
@@ -95,11 +95,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 14px 16px;
+      padding: 16px 18px;
       border-radius: 10px;
       color: var(--muted);
       text-decoration: none;
-      font-size: 1.05rem;
+      font-size: 1.18rem;
       font-weight: 500;
       border: 1px solid transparent;
       transition: all 0.18s ease;
@@ -108,13 +108,13 @@
     .nav-link:hover, .nav-link.active {
       color: var(--text);
       border-color: var(--line);
-      background: rgba(56,189,248,0.07);
+      background: rgba(2,132,199,0.07);
     }
 
     .nav-link.active { color: var(--accent); }
 
     .nav-icon {
-      font-size: 1.2rem;
+      font-size: 1.35rem;
       width: 20px;
       text-align: center;
     }
@@ -127,17 +127,17 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 14px 16px;
+      padding: 16px 18px;
       border-radius: 10px;
       color: var(--muted);
       cursor: pointer;
-      font-size: 1.05rem;
+      font-size: 1.18rem;
       font-weight: 500;
       transition: all 0.18s ease;
       width: 100%;
     }
 
-    .nav-btn:hover { color: var(--text); background: rgba(56,189,248,0.07); }
+    .nav-btn:hover { color: var(--text); background: rgba(2,132,199,0.07); }
 
     .arrow {
       margin-left: auto;
@@ -154,22 +154,22 @@
       gap: 4px;
       margin: 4px 0 4px 20px;
       padding-left: 14px;
-      border-left: 2px solid rgba(56,189,248,0.3);
+      border-left: 2px solid rgba(2,132,199,0.3);
     }
 
     .sub-nav.open { display: flex; }
 
     .sub-link {
       display: block;
-      padding: 7px 10px;
+      padding: 9px 12px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       text-decoration: none;
       border-radius: 6px;
       transition: all 0.15s;
     }
 
-    .sub-link:hover { color: var(--accent); background: rgba(56,189,248,0.06); }
+    .sub-link:hover { color: var(--accent); background: rgba(2,132,199,0.06); }
 
     .sidebar-footer {
       display: flex;
@@ -182,9 +182,9 @@
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
-      background: rgba(56,189,248,0.12);
+      background: rgba(2,132,199,0.08);
       color: var(--accent);
-      border: 1px solid rgba(56,189,248,0.25);
+      border: 1px solid rgba(2,132,199,0.25);
     }
 
     .pill.ghost {
@@ -194,7 +194,10 @@
     }
 
     /* ── MAIN CONTENT ── */
-    .content { overflow-y: auto; }
+    .content {
+      overflow-y: auto;
+      background: linear-gradient(180deg, #dbeefb 0%, #eef6fd 320px, var(--bg) 640px);
+    }
 
     /* ── HERO ── */
     .hero {
@@ -212,7 +215,7 @@
       position: absolute;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(2,132,199,0.06) 0%, transparent 70%);
       top: -100px; right: -100px;
       pointer-events: none;
     }
@@ -276,14 +279,14 @@
 
     .btn-primary {
       background: var(--accent);
-      color: #08121f;
-      box-shadow: 0 0 24px rgba(56,189,248,0.3);
+      color: #ffffff;
+      box-shadow: 0 2px 12px rgba(2,132,199,0.25);
     }
 
     .btn-primary:hover {
-      background: #7dd3fc;
+      background: #0369a1;
       transform: translateY(-2px);
-      box-shadow: 0 0 32px rgba(56,189,248,0.4);
+      box-shadow: 0 4px 16px rgba(2,132,199,0.3);
     }
 
     .btn-secondary {
@@ -384,6 +387,7 @@
 
     .project-card {
       background: var(--card);
+      box-shadow: 0 2px 8px rgba(15,23,42,0.05);
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 24px 28px;
@@ -396,22 +400,26 @@
     }
 
     .project-card:hover {
-      border-color: rgba(56,189,248,0.35);
-      background: rgba(13,24,48,0.8);
+      border-color: rgba(2,132,199,0.4);
+      background: #f4faff;
       transform: translateX(4px);
-      box-shadow: 0 0 30px rgba(56,189,248,0.07);
+      box-shadow: 0 6px 18px rgba(15,23,42,0.08);
     }
 
     .project-icon {
-      width: 48px;
+      width: 52px;
       height: 48px;
-      background: rgba(56,189,248,0.1);
-      border: 1px solid rgba(56,189,248,0.2);
+      background: rgba(2,132,199,0.07);
+      border: 1px solid rgba(2,132,199,0.2);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--accent);
       flex-shrink: 0;
     }
 
@@ -440,9 +448,9 @@
       border-radius: 20px;
       font-size: 0.82rem;
       font-weight: 600;
-      background: rgba(56,189,248,0.08);
+      background: rgba(2,132,199,0.06);
       color: var(--accent);
-      border: 1px solid rgba(56,189,248,0.2);
+      border: 1px solid rgba(2,132,199,0.2);
     }
 
     .project-arrow {
@@ -458,7 +466,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(5,9,18,0.85);
+      background: rgba(15,23,42,0.45);
       backdrop-filter: blur(8px);
       z-index: 999;
       display: flex;
@@ -483,7 +491,7 @@
       position: relative;
       transform: translateY(20px);
       transition: transform 0.3s ease;
-      box-shadow: 0 0 60px rgba(56,189,248,0.08);
+      box-shadow: 0 20px 50px rgba(15,23,42,0.2);
     }
 
     .modal-overlay.open .modal-card { transform: translateY(0); }
@@ -491,7 +499,7 @@
     .modal-close {
       position: absolute;
       top: 16px; right: 16px;
-      background: rgba(255,255,255,0.05);
+      background: rgba(15,23,42,0.05);
       border: 1px solid var(--line);
       color: var(--muted);
       width: 32px; height: 32px;
@@ -512,9 +520,9 @@
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 600;
-      background: rgba(56,189,248,0.1);
+      background: rgba(2,132,199,0.07);
       color: var(--accent);
-      border: 1px solid rgba(56,189,248,0.25);
+      border: 1px solid rgba(2,132,199,0.25);
       margin-bottom: 16px;
     }
 
@@ -580,6 +588,7 @@
 
     .contact-card {
       background: var(--card);
+      box-shadow: 0 2px 8px rgba(15,23,42,0.05);
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 20px 24px;
@@ -592,14 +601,18 @@
     }
 
     .contact-card:hover {
-      border-color: rgba(56,189,248,0.35);
+      border-color: rgba(2,132,199,0.4);
       transform: translateY(-2px);
     }
 
     .contact-icon {
-      font-size: 1.4rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
       width: 44px; height: 44px;
-      background: rgba(56,189,248,0.1);
+      background: rgba(2,132,199,0.07);
+      border: 1px solid rgba(2,132,199,0.2);
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -649,16 +662,16 @@
 
   <nav class="nav">
     <a href="#home" class="nav-link active">
-      <span class="nav-icon">🏠</span> Accueil
+      Accueil
     </a>
     <a href="#about" class="nav-link">
-      <span class="nav-icon">👤</span> À propos
+      À propos
     </a>
 
     <!-- Menu déroulant Projets -->
     <div class="nav-group">
       <button class="nav-btn" onclick="toggleProjects(this)">
-        <span class="nav-icon">📁</span>
+        
         Projets
         <span class="arrow">▼</span>
       </button>
@@ -672,10 +685,10 @@
     </div>
 
     <a href="#skills" class="nav-link">
-      <span class="nav-icon">⚡</span> Compétences
+      Compétences
     </a>
     <a href="#contact" class="nav-link">
-      <span class="nav-icon">✉️</span> Contact
+      Contact
     </a>
   </nav>
 
@@ -737,7 +750,7 @@
     <div class="projects-list">
 
       <div class="project-card" onclick="openModal('ratp')">
-        <div class="project-icon">🚇</div>
+        <div class="project-icon">RATP</div>
         <div class="project-info">
           <h3>Stage RATP — Chargé de Méthode</h3>
           <p>Amélioration de l'outil SDM, fiches techniques MP89/MP05, maintenance préventive — Ateliers de Fontenay MRF L01.</p>
@@ -751,7 +764,7 @@
       </div>
 
       <div class="project-card" onclick="openModal('sae_s4')">
-        <div class="project-icon">🌦️</div>
+        <div class="project-icon">S4</div>
         <div class="project-info">
           <h3>SAÉ S4 — Station météo IoT autonome</h3>
           <p>PCB KiCad, STM32 en C, encodage Cayenne LPP, déploiement LoRaWAN TTN → TagoIO.</p>
@@ -766,7 +779,7 @@
       </div>
 
       <div class="project-card" onclick="openModal('sae_s3')">
-        <div class="project-icon">⚙️</div>
+        <div class="project-icon">S3</div>
         <div class="project-info">
           <h3>SAÉ S3 — Maintenance & Supervision Festo</h3>
           <p>Diagnostic de pannes, communication réseau automate/E-S, supervision IHM et planification sous Excel.</p>
@@ -780,7 +793,7 @@
       </div>
 
       <div class="project-card" onclick="openModal('robot')">
-        <div class="project-icon">🤖</div>
+        <div class="project-icon">S2</div>
         <div class="project-info">
           <h3>SAÉ S2 — Robot détecteur d'obstacles</h3>
           <p>Robot autonome avec capteurs ultrasons et Arduino, détection en temps réel.</p>
@@ -794,7 +807,7 @@
       </div>
 
       <div class="project-card" onclick="openModal('carte_elec')">
-        <div class="project-icon">🔌</div>
+        <div class="project-icon">S1</div>
         <div class="project-info">
           <h3>SAÉ S1 — Carte amplificateur & écrêteur</h3>
           <p>Simulation, soudage et validation d'un circuit amplificateur + écrêteur analogique.</p>
@@ -817,43 +830,37 @@
 
     <div class="contact-grid">
       <div class="contact-card" style="cursor:default">
-        <div class="contact-icon">⚡</div>
-        <div class="contact-info">
+                <div class="contact-info">
           <span>Électronique</span>
           <strong>Circuits, Conception, LTspice, Simulation</strong>
         </div>
       </div>
       <div class="contact-card" style="cursor:default">
-        <div class="contact-icon">💻</div>
-        <div class="contact-info">
+                <div class="contact-info">
           <span>Informatique industrielle</span>
           <strong>C (STM32Cube) • Python • Arduino</strong>
         </div>
       </div>
       <div class="contact-card" style="cursor:default">
-        <div class="contact-icon">🏭</div>
-        <div class="contact-info">
+                <div class="contact-info">
           <span>Automatisme</span>
           <strong>Siemens, FPGA, VHDL, Vivado</strong>
         </div>
       </div>
       <div class="contact-card" style="cursor:default">
-        <div class="contact-icon">📐</div>
-        <div class="contact-info">
+                <div class="contact-info">
           <span>Conception & CAO</span>
           <strong>SolidWorks, KiCad, Prototypage 3D</strong>
         </div>
       </div>
       <div class="contact-card" style="cursor:default">
-        <div class="contact-icon">📊</div>
-        <div class="contact-info">
+                <div class="contact-info">
           <span>Développement VBA</span>
           <strong>Automatisation, Traitement de données</strong>
         </div>
       </div>
       <div class="contact-card" style="cursor:default">
-        <div class="contact-icon">🔧</div>
-        <div class="contact-info">
+                <div class="contact-info">
           <span>Maintenance</span>
           <strong>Diagnostic, Préventive & Corrective</strong>
         </div>
@@ -867,22 +874,22 @@
     <h2 class="section-title">Contact</h2>
 
     <div class="contact-grid">
-      <div class="contact-card" style="cursor:pointer" onclick="navigator.clipboard.writeText('stanislasakakpo.com@gmail.com').then(()=>alert('📧 Email copié !\nstanislasakakpo.com@gmail.com'))">
-        <div class="contact-icon">📧</div>
+      <div class="contact-card" style="cursor:pointer" onclick="navigator.clipboard.writeText('stanislasakakpo.com@gmail.com').then(()=>alert('Email copié !\nstanislasakakpo.com@gmail.com'))">
+        <div class="contact-icon">@</div>
         <div class="contact-info">
           <span>Email</span>
           <strong>Cliquer pour copier</strong>
         </div>
       </div>
       <a href="https://www.linkedin.com/in/stanislas-akakpo-a7bb53354/" target="_blank" class="contact-card">
-        <div class="contact-icon">💼</div>
+        <div class="contact-icon">in</div>
         <div class="contact-info">
           <span>LinkedIn</span>
           <strong>Mon profil</strong>
         </div>
       </a>
       <a href="Cv_AKAKPO stanislas.pdf" target="_blank" class="contact-card">
-        <div class="contact-icon">📄</div>
+        <div class="contact-icon">CV</div>
         <div class="contact-info">
           <span>CV</span>
           <strong>Télécharger</strong>
@@ -964,9 +971,9 @@
 
     const actionsHTML = `
       <div class="modal-actions">
-        ${p.pdf ? `<a href="${p.pdf}" target="_blank" class="btn btn-primary">📄 Rapport PDF</a>` : ''}
-        ${p.github ? `<a href="${p.github}" target="_blank" class="btn btn-secondary">💻 GitHub</a>` : ''}
-        ${!p.pdf && !p.github ? `<span style="color:var(--muted);font-size:0.85rem">📎 Documents à venir</span>` : ''}
+        ${p.pdf ? `<a href="${p.pdf}" target="_blank" class="btn btn-primary">Rapport PDF</a>` : ''}
+        ${p.github ? `<a href="${p.github}" target="_blank" class="btn btn-secondary">GitHub</a>` : ''}
+        ${!p.pdf && !p.github ? `<span style="color:var(--muted);font-size:0.85rem">Documents à venir</span>` : ''}
       </div>`;
 
     document.getElementById('modal-content').innerHTML = `
